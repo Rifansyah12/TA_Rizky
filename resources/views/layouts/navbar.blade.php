@@ -14,9 +14,9 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Berita</a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                            <a href="facility.html" class="dropdown-item">Pendaftaran</a>
-                            <a href="team.html" class="dropdown-item">Kegiatan</a>
-                            <a href="call-to-action.html" class="dropdown-item">Agenda</a>
+                            <a href="{{ route('menupendaftaran') }}" class="dropdown-item">Pendaftaran</a>
+                            <a href="{{ route('kegiatan') }}" class="dropdown-item">Kegiatan</a>
+                            <a href="{{ route('agenda') }}" class="dropdown-item">Agenda</a>
                         </div>
                     </div>
                     <a href="{{ route('prestasi') }}" class="nav-item nav-link">Prestasi</a>

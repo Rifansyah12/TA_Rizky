@@ -21,7 +21,14 @@
             <div class="container">
                 <div class="bg-light rounded p-5">
                     <h2 class="mb-4 text-center">Formulir Pendaftaran RA Ar-risalah</h2>
-                    <form method="POST" action="#">
+    
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('pendaftaran.store') }}">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
