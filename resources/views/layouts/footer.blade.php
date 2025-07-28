@@ -38,34 +38,15 @@
             <div class="col-lg-3 col-md-6">
                 <h3 class="text-white mb-4">Galeri Foto</h3>
                 <div class="row g-2 pt-2">
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-1.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-2.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-3.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-4.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-5.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded bg-light p-1" src="img/classes-6.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Newsletter -->
-            <div class="col-lg-3 col-md-6">
-                <h3 class="text-white mb-4">Newsletter</h3>
-                <p>Daftarkan email Anda untuk mendapatkan informasi terbaru dari kami.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px;">
-                    <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Email Anda">
-                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Daftar</button>
+                    @forelse($galeris as $galeri)
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="{{ asset('storage/' . $galeri->gambar) }}" alt="{{ $galeri->judul }}">
+                        </div>
+                    @empty
+                        <div class="col-12">
+                            <p class="text-white">Belum ada foto di galeri.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -77,7 +58,7 @@
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                     &copy; <a class="border-bottom" href="#">RA Ar-Risalah</a>, Hak Cipta Dilindungi.
-                    Dirancang oleh <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                    Dirancang oleh <a class="border-bottom" href="https://htmlcodex.com"></a>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <div class="footer-menu">

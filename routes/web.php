@@ -22,15 +22,13 @@ use App\Http\Controllers\Admin\CMS\CmsKegiatanController;
 use App\Http\Controllers\Admin\CMS\CmsAgendaController;
 use App\Http\Controllers\Admin\CMS\CmsPrestasiController;
 use App\Http\Controllers\Admin\CMS\CmsEkstrakurikulerController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\FooterController;
 
 
 
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/footer', [FooterController::class, 'index']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

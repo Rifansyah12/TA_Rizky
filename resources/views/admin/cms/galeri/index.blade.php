@@ -46,11 +46,43 @@
                     <td>
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $galeri->id }}">Edit</button>
                         <form method="POST" action="{{ route('cms.galeri.destroy', $galeri) }}" class="d-inline">
-                            @csrf @method('DELETE')
+                            @csrf
+                            @method('DELETE')
                             <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
+
+                <!-- Modal Edit (harus di dalam loop) -->
+                <div class="modal fade" id="editModal{{ $galeri->id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <form method="POST" action="{{ route('cms.galeri.update', $galeri) }}" enctype="multipart/form-data" class="modal-content">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Galeri</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-2">
+                                    <label>Judul</label>
+                                    <input type="text" name="judul" class="form-control" value="{{ $galeri->judul }}" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Deskripsi</label>
+                                    <textarea name="deskripsi" class="form-control">{{ $galeri->deskripsi }}</textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Gambar</label>
+                                    <input type="file" name="gambar" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 @empty
                 <tr>
                     <td colspan="5" class="text-center">Tidak ada data galeri.</td>
@@ -61,63 +93,33 @@
     </div>
 </div>
 
-                <!-- Modal Edit -->
-                <div class="modal fade" id="editModal{{ $galeri->id }}" tabindex="-1">
-                  <div class="modal-dialog">
-                    <form method="POST" action="{{ route('cms.galeri.update', $galeri) }}" enctype="multipart/form-data" class="modal-content">
-                        @csrf @method('PUT')
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Galeri</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-2">
-                                <label>Judul</label>
-                                <input type="text" name="judul" class="form-control" value="{{ $galeri->judul }}" required>
-                            </div>
-                            <div class="mb-2">
-                                <label>Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control">{{ $galeri->deskripsi }}</textarea>
-                            </div>
-                            <div class="mb-2">
-                                <label>Gambar</label>
-                                <input type="file" name="gambar" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-
 <!-- Modal Tambah -->
 <div class="modal fade" id="createModal" tabindex="-1">
-  <div class="modal-dialog">
-    <form method="POST" action="{{ route('cms.galeri.store') }}" enctype="multipart/form-data" class="modal-content">
-        @csrf
-        <div class="modal-header">
-            <h5 class="modal-title">Tambah Galeri</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-            <div class="mb-2">
-                <label>Judul</label>
-                <input type="text" name="judul" class="form-control" required>
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('cms.galeri.store') }}" enctype="multipart/form-data" class="modal-content">
+            @csrf
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Galeri</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="mb-2">
-                <label>Deskripsi</label>
-                <textarea name="deskripsi" class="form-control"></textarea>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label>Judul</label>
+                    <input type="text" name="judul" class="form-control" required>
+                </div>
+                <div class="mb-2">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control"></textarea>
+                </div>
+                <div class="mb-2">
+                    <label>Gambar</label>
+                    <input type="file" name="gambar" class="form-control">
+                </div>
             </div>
-            <div class="mb-2">
-                <label>Gambar</label>
-                <input type="file" name="gambar" class="form-control">
+            <div class="modal-footer">
+                <button class="btn btn-primary">Simpan</button>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary">Simpan</button>
-        </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 @endsection

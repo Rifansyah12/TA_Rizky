@@ -32,7 +32,16 @@ class GuruController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Guru::create($request->all());
+       $data = $request->all();
+
+    if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/foto_guru'), $filename);
+        $data['foto'] = $filename;
+    }
+
+    Guru::create($data);
         return redirect()->route('management_guru.index')->with('success', 'Data guru berhasil ditambahkan.');
     }
 
@@ -51,7 +60,17 @@ class GuruController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $guru->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/foto_guru'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        $guru->update($data);
+
         return redirect()->route('management_guru.index')->with('success', 'Data guru berhasil diperbarui.');
     }
 
@@ -61,4 +80,5 @@ class GuruController extends Controller
         $guru->delete();
         return redirect()->route('management_guru.index')->with('success', 'Data guru berhasil dihapus.');
     }
+
 }

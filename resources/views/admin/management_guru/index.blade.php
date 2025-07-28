@@ -17,6 +17,7 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
+                <th>Foto</th>
                 <th>Nama Guru</th>
                 <th>NIP</th>
                 <th>Mata Pelajaran</th>
@@ -28,24 +29,22 @@
             @forelse ($dataGuru as $index => $guru)
                 <tr>
                     <td>{{ $index + 1 }}</td>
+                    <td>
+                        @if($guru->foto)
+                            <img src="{{ asset('uploads/foto_guru/' . $guru->foto) }}" width="50" height="50" class="rounded-circle" alt="Foto Guru">
+                        @else
+                            <span class="text-muted">Tidak ada</span>
+                        @endif
+                    </td>
                     <td>{{ $guru->nama }}</td>
                     <td>{{ $guru->nip }}</td>
                     <td>{{ $guru->mapel }}</td>
                     <td>{{ $guru->no_hp }}</td>
                     <td>
-                        {{-- Detail --}}
-                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal{{ $guru->id }}">Detail</button>
-
-                        {{-- Edit --}}
-                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $guru->id }}">Edit</button>
-
-                        {{-- Hapus --}}
-                        <form action="{{ route('management_guru.destroy', $guru->id) }}" method="POST" class="d-inline">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                        </form>
+                        ...
                     </td>
                 </tr>
+
 
                 {{-- Modal Detail --}}
                 <div class="modal fade" id="detailModal{{ $guru->id }}" tabindex="-1">
@@ -57,6 +56,11 @@
                                 <p><strong>NIP:</strong> {{ $guru->nip }}</p>
                                 <p><strong>Mata Pelajaran:</strong> {{ $guru->mapel }}</p>
                                 <p><strong>No HP:</strong> {{ $guru->no_hp }}</p>
+                                @if($guru->foto)
+                                    <p><strong>Foto:</strong><br>
+                                        <img src="{{ asset('uploads/foto_guru/' . $guru->foto) }}" width="120" alt="Foto Guru">
+                                    </p>
+                                @endif
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -89,6 +93,10 @@
                                         <label>No HP</label>
                                         <input type="text" name="no_hp" class="form-control" value="{{ $guru->no_hp }}" required>
                                     </div>
+                                    <div class="mb-2">
+                                        <label>Foto (opsional)</label>
+                                        <input type="file" name="foto" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -113,7 +121,7 @@
     <div class="modal fade" id="tambahModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST" action="{{ route('management_guru.store') }}">
+                <form method="POST" action="{{ route('management_guru.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header"><h5 class="modal-title">Tambah Guru</h5></div>
                     <div class="modal-body">
@@ -132,6 +140,10 @@
                         <div class="mb-2">
                             <label>No HP</label>
                             <input type="text" name="no_hp" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Foto (opsional)</label>
+                            <input type="file" name="foto" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">

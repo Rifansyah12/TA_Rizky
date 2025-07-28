@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->string('mapel');
             $table->string('no_hp');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

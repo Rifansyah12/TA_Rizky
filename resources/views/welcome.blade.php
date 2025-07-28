@@ -32,6 +32,45 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
+<!-- Tambahkan CSS ini di bagian <style> atau file CSS -->
+<style>
+    .team-img {
+        width: 100%;
+        height: 500px; /* Ukuran tinggi tetap, bisa disesuaikan */
+        overflow: hidden;
+        border-radius: 8px; /* opsional */
+    }
+
+    .team-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+.team-text.small-text {
+    font-size: 1rem; /* sebelumnya 0.85rem */
+}
+
+.team-text.small-text h3 {
+    font-size: 1.25rem; /* sebelumnya 1rem */
+    margin-bottom: 6px;
+}
+
+.team-text.small-text p {
+    font-size: 1.1rem; /* sebelumnya 1rem */
+    margin-bottom: 6px;
+}
+
+.team-text.small-text .btn {
+    width: 36px; /* sebelumnya 30px */
+    height: 36px;
+    font-size: 0.9rem; /* sebelumnya 0.75rem */
+    padding: 0;
+}
+
+</style>
 <body>
     <div class="container-xxl bg-success p-0">
         <!-- Spinner Start -->
@@ -124,7 +163,7 @@
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Fasilitsa</h1>
+                    <h1 class="mb-3">Fasilitas</h1>
                     <p style="color: white;">RA kami dilengkapi dengan berbagai fasilitas penunjang pembelajaran anak usia dini, seperti ruang kelas yang nyaman, taman bermain edukatif, perpustakaan mini, alat peraga pembelajaran, 
                     serta lingkungan yang bersih dan aman untuk mendukung tumbuh 
                     kembang anak secara optimal.</p>
@@ -398,122 +437,38 @@
             </div>
         </div>
         <!-- Classes End -->
-
-
-        <!-- Appointment Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="bg-light rounded">
-                    <div class="row g-0">
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                            <div class="h-100 d-flex flex-column justify-content-center p-5">
-                                <h1 class="mb-4">Make Appointment</h1>
-                                <form>
-                                    <div class="row g-3">
-                                        <div class="col-sm-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="gname" placeholder="Gurdian Name">
-                                                <label for="gname">Gurdian Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-floating">
-                                                <input type="email" class="form-control border-0" id="gmail" placeholder="Gurdian Email">
-                                                <label for="gmail">Gurdian Email</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="cname" placeholder="Child Name">
-                                                <label for="cname">Child Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="cage" placeholder="Child Age">
-                                                <label for="cage">Child Age</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-floating">
-                                                <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
-                                                <label for="message">Message</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
-                            <div class="position-relative h-100">
-                                <img class="position-absolute w-100 h-100 rounded" src="img/appointment.jpg" style="object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Appointment End -->
-
-
-        <!-- Team Start -->
+                <!-- Team Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Popular Teachers</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit
-                        eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    <h1 class="mb-3">Guru & Tenaga Kependidikan</h1>
+                    <p style="color: white;">RA Ar-Risalah memiliki tenaga pendidik dan kependidikan yang berdedikasi tinggi dalam membimbing, mendidik, dan menciptakan lingkungan belajar yang aman, nyaman, serta menyenangkan bagi anak-anak usia dini.</p>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    @foreach($dataGuru as $guru)
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.{{ $loop->iteration }}s">
                         <div class="team-item position-relative">
-                            <img class="img-fluid rounded-circle w-75" src="img/team-1.jpg" alt="">
-                            <div class="team-text">
-                                <h3>Full Name</h3>
-                                <p>Designation</p>
+                            <div class="team-img">
+                                <img src="{{ asset('uploads/foto_guru/' . $guru->foto) }}" alt="{{ $guru->nama }}">
+                            </div>
+                            <div class="team-text small-text">
+                                <h3>{{ $guru->nama }}</h3>
+                                <p>{{ $guru->mapel }}</p>
                                 <div class="d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item position-relative">
-                            <img class="img-fluid rounded-circle w-75" src="img/team-2.jpg" alt="">
-                            <div class="team-text">
-                                <h3>Full Name</h3>
-                                <p>Designation</p>
-                                <div class="d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item position-relative">
-                            <img class="img-fluid rounded-circle w-75" src="img/team-3.jpg" alt="">
-                            <div class="team-text">
-                                <h3>Full Name</h3>
-                                <p>Designation</p>
-                                <div class="d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
         <!-- Team End -->
+
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -540,34 +495,17 @@
                         <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Photo Gallery</h3>
+                        <h3 class="text-white mb-4">Galeri Foto</h3>
                         <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/classes-6.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Newsletter</h3>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                            @forelse($galeris as $galeri)
+                                <div class="col-4">
+                                    <img class="img-fluid rounded bg-light p-1" src="{{ asset('storage/' . $galeri->gambar) }}" alt="{{ $galeri->judul }}">
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <p class="text-white">Belum ada foto di galeri.</p>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
