@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\CMS\CmsPrestasiController;
 use App\Http\Controllers\Admin\CMS\CmsEkstrakurikulerController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\ArtikelController; 
+use App\Http\Controllers\GaleriController;
 
 
 
@@ -40,7 +42,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 
 
 // Admin_pendaftaran

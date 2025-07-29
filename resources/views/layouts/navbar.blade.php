@@ -17,6 +17,9 @@
                             <a href="{{ route('menupendaftaran') }}" class="dropdown-item">Pendaftaran</a>
                             <a href="{{ route('kegiatan') }}" class="dropdown-item">Kegiatan</a>
                             <a href="{{ route('agenda') }}" class="dropdown-item">Agenda</a>
+                            <a href="{{ route('artikel') }}" class="dropdown-item">Artikel</a>
+                            <a href="{{ route('galeri.index') }}" class="dropdown-item">Galeri</a>
+
                         </div>
                     </div>
                     <a href="{{ route('prestasi') }}" class="nav-item nav-link">Prestasi</a>

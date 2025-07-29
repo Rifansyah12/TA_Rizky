@@ -93,14 +93,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                    <a href="/" class="nav-item nav-link active">Beranda</a>
                     <a href="{{ route('profil') }}" class="nav-item nav-link">Profil</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Berita</a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                            <a href="facility.html" class="dropdown-item">Pendaftaran</a>
-                            <a href="team.html" class="dropdown-item">Kegiatan</a>
-                            <a href="call-to-action.html" class="dropdown-item">Agenda</a>
+                            <a href="{{ route('menupendaftaran') }}" class="dropdown-item">Pendaftaran</a>
+                            <a href="{{ route('kegiatan') }}" class="dropdown-item">Kegiatan</a>
+                            <a href="{{ route('agenda') }}" class="dropdown-item">Agenda</a>
+                            <a href="{{ route('artikel') }}" class="dropdown-item">Artikel</a>
+                            <a href="{{ route('galeri.index') }}" class="dropdown-item">Galeri</a>
                         </div>
                     </div>
                     <a href="{{ route('prestasi') }}" class="nav-item nav-link">Prestasi</a>
@@ -315,12 +317,12 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="classes-item">
-                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                                <img class="img-fluid rounded-circle" src="img/classes-4.jpg" alt="">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3" style="aspect-ratio: 1/1; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid" src="img/kegiatan/kegiatan(12).jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                             </div>
                             <div class="bg-light rounded p-4 pt-5 mt-n5">
-                                <a class="d-block text-center h3 mt-3 mb-4" href="">Language & Speaking</a>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">pg</a>
+                                <!-- <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 45px; height: 45px;">
                                         <div class="ms-3">
@@ -329,24 +331,30 @@
                                         </div>
                                     </div>
                                     <span class="bg-primary text-white rounded-pill py-2 px-3" href="">$99</span>
-                                </div>
+                                </div> -->
                                 <div class="row g-1">
                                     <div class="col-4">
                                         <div class="border-top border-3 border-primary pt-2">
-                                            <h6 class="text-primary mb-1">Age:</h6>
-                                            <small>3-5 Years</small>
+                                            <h6 class="text-primary mb-1">Hari :</h6>
+                                            <small>Senin-Kamis</small>
+                                            <br>
+                                            <small>Jumat</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-success pt-2">
-                                            <h6 class="text-success mb-1">Time:</h6>
-                                            <small>9-10 AM</small>
+                                            <h6 class="text-success mb-1">Waktu :</h6>
+                                            <small>08.00 : 11.00</small>
+                                            <br>
+                                            <small>08.00 : 11.00</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-warning pt-2">
-                                            <h6 class="text-warning mb-1">Capacity:</h6>
-                                            <small>30 Kids</small>
+                                            <h6 class="text-warning mb-1">Keterangan :</h6>
+                                            <small>Sholat Jumat</small>
+                                            <br>
+                                            <small>Berjamaah</small>
                                         </div>
                                     </div>
                                 </div>
@@ -355,12 +363,12 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="classes-item">
-                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                                <img class="img-fluid rounded-circle" src="img/classes-5.jpg" alt="">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3" style="aspect-ratio: 1/1; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid" src="img/kegiatan/kegiatan(38).jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                             </div>
                             <div class="bg-light rounded p-4 pt-5 mt-n5">
-                                <a class="d-block text-center h3 mt-3 mb-4" href="">Religion & History</a>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">A</a>
+                                <!-- <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 45px; height: 45px;">
                                         <div class="ms-3">
@@ -369,24 +377,30 @@
                                         </div>
                                     </div>
                                     <span class="bg-primary text-white rounded-pill py-2 px-3" href="">$99</span>
-                                </div>
+                                </div> -->
                                 <div class="row g-1">
                                     <div class="col-4">
                                         <div class="border-top border-3 border-primary pt-2">
-                                            <h6 class="text-primary mb-1">Age:</h6>
-                                            <small>3-5 Years</small>
+                                            <h6 class="text-primary mb-1">Hari :</h6>
+                                            <small>Senin-Kamis</small>
+                                            <br>
+                                            <small>Jumat</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-success pt-2">
-                                            <h6 class="text-success mb-1">Time:</h6>
-                                            <small>9-10 AM</small>
+                                            <h6 class="text-success mb-1">Waktu :</h6>
+                                            <small>08.00 : 12.30</small>
+                                            <br>
+                                            <small>08.00 : 11.00</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-warning pt-2">
-                                            <h6 class="text-warning mb-1">Capacity:</h6>
-                                            <small>30 Kids</small>
+                                            <h6 class="text-warning mb-1">Keterangan :</h6>
+                                            <small>Sholat Jumat</small>
+                                            <br>
+                                            <small>Berjamaah</small>
                                         </div>
                                     </div>
                                 </div>
@@ -395,12 +409,13 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="classes-item">
-                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                                <img class="img-fluid rounded-circle" src="img/classes-6.jpg" alt="">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3" style="aspect-ratio: 1/1; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid" src="img/kegiatan/kegiatan_(33).jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                             </div>
+
                             <div class="bg-light rounded p-4 pt-5 mt-n5">
-                                <a class="d-block text-center h3 mt-3 mb-4" href="">General Knowledge</a>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">B</a>
+                                <!-- <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 45px; height: 45px;">
                                         <div class="ms-3">
@@ -409,24 +424,30 @@
                                         </div>
                                     </div>
                                     <span class="bg-primary text-white rounded-pill py-2 px-3" href="">$99</span>
-                                </div>
+                                </div> -->
                                 <div class="row g-1">
                                     <div class="col-4">
                                         <div class="border-top border-3 border-primary pt-2">
-                                            <h6 class="text-primary mb-1">Age:</h6>
-                                            <small>3-5 Years</small>
+                                            <h6 class="text-primary mb-1">Hari :</h6>
+                                            <small>Senin-Kamis</small>
+                                            <br>
+                                            <small>Jumat</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-success pt-2">
-                                            <h6 class="text-success mb-1">Time:</h6>
-                                            <small>9-10 AM</small>
+                                            <h6 class="text-success mb-1">Waktu :</h6>
+                                            <small>08.00 : 12.30</small>
+                                            <br>
+                                            <small>08.00 : 11.00</small>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="border-top border-3 border-warning pt-2">
-                                            <h6 class="text-warning mb-1">Capacity:</h6>
-                                            <small>30 Kids</small>
+                                            <h6 class="text-warning mb-1">Keterangan :</h6>
+                                            <small>Sholat Jumat</small>
+                                            <br>
+                                            <small>Berjamaah</small>
                                         </div>
                                     </div>
                                 </div>
@@ -437,6 +458,7 @@
             </div>
         </div>
         <!-- Classes End -->
+
                 <!-- Team Start -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -476,14 +498,19 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h3 class="text-white mb-4">Get In Touch</h3>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>jl.Terusan Logam no11 Bandung</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>022-88880845</p>
+                        <p class="mb-2">
+                            <i class="fab fa-whatsapp me-2"></i>
+                            <a href="https://wa.me/6281320047252">
+                                0813-2004-7252 (Hubungi via WhatsApp)
+                            </a>
+                        </p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://instagram.com/arrisalah_islamic_shcool"><i class="fab fa-instagram"></i></a>
+                            <!-- <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a> -->
+                            <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/results?search_query=arrisalah+Islamic+school"><i class="fab fa-youtube"></i></a>
+                            <!-- <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a> -->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -506,27 +533,6 @@
                                     <p class="text-white">Belum ada foto di galeri.</p>
                                 </div>
                             @endforelse
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                            <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="">Home</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
                         </div>
                     </div>
                 </div>

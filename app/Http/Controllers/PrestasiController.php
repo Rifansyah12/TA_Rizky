@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Prestasi; 
 
 class PrestasiController extends Controller
 {
     public function index()
     {
-        return view('prestasi'); // akan menampilkan views/profile.blade.php
+        $prestasis = Prestasi::latest()->take(3)->get(); 
+        return view('prestasi', compact('prestasis')); // perbaikan di sini
     }
+
 }

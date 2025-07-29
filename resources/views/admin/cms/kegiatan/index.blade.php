@@ -57,8 +57,42 @@
     </div>
 </div>
 
+<!-- Modal Tambah -->
+<div class="modal fade" id="createModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('cms.kegiatan.store') }}" enctype="multipart/form-data" class="modal-content">
+            @csrf
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label>Judul</label>
+                    <input type="text" name="judul" class="form-control" required>
+                </div>
+                <div class="mb-2">
+                    <label>Foto</label>
+                    <input type="file" name="foto" class="form-control">
+                </div>
+                <div class="mb-2">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="mb-2">
+                    <label>Tanggal</label>
+                    <input type="date" name="tanggal" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
 
-<!-- Modal Edit -->
+                    <!-- Modal Edit (HARUS di dalam loop) -->
                     <div class="modal fade" id="editModal{{ $kegiatan->id }}" tabindex="-1">
                         <div class="modal-dialog">
                             <form method="POST" action="{{ route('cms.kegiatan.update', $kegiatan) }}" class="modal-content" enctype="multipart/form-data">
@@ -94,37 +128,3 @@
                             </form>
                         </div>
                     </div>
-<!-- Modal Tambah -->
-<div class="modal fade" id="createModal" tabindex="-1">
-    <div class="modal-dialog">
-        <form method="POST" action="{{ route('cms.kegiatan.store') }}" enctype="multipart/form-data" class="modal-content">
-            @csrf
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Kegiatan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-2">
-                    <label>Judul</label>
-                    <input type="text" name="judul" class="form-control" required>
-                </div>
-                <div class="mb-2">
-                    <label>Foto</label>
-                    <input type="file" name="foto" class="form-control">
-                </div>
-                <div class="mb-2">
-                    <label>Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="mb-2">
-                    <label>Tanggal</label>
-                    <input type="date" name="tanggal" class="form-control">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
-    </div>
-</div>
-@endsection

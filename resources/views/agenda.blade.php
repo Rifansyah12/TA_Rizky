@@ -27,34 +27,21 @@
 
         <!-- Timeline Agenda -->
         <div class="timeline">
-            <!-- Agenda 1 -->
-            <div class="timeline-item left">
-                <div class="timeline-content shadow-sm bg-light rounded p-4">
-                    <h5 class="text-primary">Senin, 5 Agustus 2025</h5>
-                    <h6 class="fw-bold">Kegiatan Pemeriksaan Kesehatan</h6>
-                    <p class="mb-0">Pemeriksaan kesehatan rutin oleh puskesmas untuk semua siswa. Kegiatan dilaksanakan mulai pukul 08.00 WIB di aula sekolah.</p>
+            @foreach($agendas as $index => $agenda)
+                <div class="timeline-item {{ $index % 2 == 0 ? 'left' : 'right' }}">
+                    <div class="timeline-content shadow-sm bg-light rounded p-4">
+                        <h5 class="text-primary">
+                            {{ \Carbon\Carbon::parse($agenda->tanggal)->translatedFormat('l, d F Y') }}
+                        </h5>
+                        <h6 class="fw-bold">{{ $agenda->judul }}</h6>
+                        <p class="mb-2">{{ $agenda->deskripsi }}</p>
+                        
+                        @if($agenda->foto)
+                            <img src="{{ asset('storage/' . $agenda->foto) }}" alt="Foto Agenda" class="img-fluid rounded" style="max-height: 200px;">
+                        @endif
+                    </div>
                 </div>
-            </div>
-
-            <!-- Agenda 2 -->
-            <div class="timeline-item right">
-                <div class="timeline-content shadow-sm bg-light rounded p-4">
-                    <h5 class="text-success">Jumat, 16 Agustus 2025</h5>
-                    <h6 class="fw-bold">Lomba 17 Agustus</h6>
-                    <p class="mb-0">Berbagai lomba diselenggarakan untuk memperingati HUT RI ke-80. Siswa dan guru turut berpartisipasi dalam kegiatan ini.</p>
-                </div>
-            </div>
-
-            <!-- Agenda 3 -->
-            <div class="timeline-item left">
-                <div class="timeline-content shadow-sm bg-light rounded p-4">
-                    <h5 class="text-danger">Rabu, 20 Agustus 2025</h5>
-                    <h6 class="fw-bold">Kegiatan Parenting</h6>
-                    <p class="mb-0">Sosialisasi dan sharing session untuk orang tua siswa dalam rangka mendukung tumbuh kembang anak secara optimal.</p>
-                </div>
-            </div>
-
-            <!-- Tambah agenda lainnya di sini -->
+            @endforeach
         </div>
     </div>
 </div>

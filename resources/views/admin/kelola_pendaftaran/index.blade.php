@@ -52,7 +52,14 @@
                     <td>{{ $pendaftar->alamat }}</td>
                     <td>{{ $pendaftar->nama_ayah }}</td>
                     <td>{{ $pendaftar->nama_ibu }}</td>
-                    <td>{{ $pendaftar->no_hp }}</td>
+                    <td>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pendaftar->no_hp) }}" target="_blank">
+                            <i class="fab fa-whatsapp" style="color: green; margin-right: 5px;"></i>
+                            {{ $pendaftar->no_hp }}
+                        </a>
+                    </td>
+
+
                     <td>
                         @if($pendaftar->status == 'diterima')
                             <span class="badge bg-success">Diterima</span>

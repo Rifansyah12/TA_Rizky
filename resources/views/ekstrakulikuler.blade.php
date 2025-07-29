@@ -55,74 +55,33 @@
         </div>
 
         <div class="row g-4">
-            <!-- Eskul 1 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/pramuka.jpeg') }}" class="card-img-top" alt="Pramuka">
-                    <div class="card-body">
-                        <h5 class="card-title">Pramuka</h5>
-                        <p class="card-text">Kegiatan yang melatih kedisiplinan, kemandirian, dan kepemimpinan siswa melalui berbagai aktivitas alam terbuka.</p>
+            @forelse($ekstrakurikulers as $item)
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ asset('storage/' . $item->foto) }}" class="card-img-top img-fixed" alt="{{ $item->nama }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $item->nama }}</h5>
+                            <p class="card-text">{{ $item->deskripsi }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Eskul 2 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/marawis.jpeg') }}" class="card-img-top" alt="Marawis">
-                    <div class="card-body">
-                        <h5 class="card-title">Marawis</h5>
-                        <p class="card-text">Seni musik tradisional Islami yang mengasah bakat siswa dalam seni tabuhan dan melatih kekompakan tim.</p>
-                    </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Belum ada data ekstrakurikuler.</p>
                 </div>
-            </div>
-
-            <!-- Eskul 3 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/tahfidz.jpeg') }}" class="card-img-top" alt="Tahfidz">
-                    <div class="card-body">
-                        <h5 class="card-title">Tahfidz</h5>
-                        <p class="card-text">Program menghafal Al-Qur'an yang ditujukan untuk membentuk karakter religius dan cinta terhadap Al-Qur'an.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Eskul 4 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/olahraga.jpeg') }}" class="card-img-top" alt="Olahraga">
-                    <div class="card-body">
-                        <h5 class="card-title">Olahraga</h5>
-                        <p class="card-text">Meliputi kegiatan seperti futsal, badminton, dan senam yang bertujuan menjaga kesehatan dan kebugaran tubuh siswa.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Eskul 5 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/hadroh.jpeg') }}" class="card-img-top" alt="Hadroh">
-                    <div class="card-body">
-                        <h5 class="card-title">Hadroh</h5>
-                        <p class="card-text">Grup musik religi yang membawakan shalawat dan lagu-lagu Islami untuk menumbuhkan kecintaan kepada Rasulullah.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Eskul 6 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('img/eskul/kesenian.jpeg') }}" class="card-img-top" alt="Kesenian">
-                    <div class="card-body">
-                        <h5 class="card-title">Kesenian</h5>
-                        <p class="card-text">Mengembangkan bakat seni siswa dalam bidang tari, lukis, drama, dan kegiatan kreatif lainnya.</p>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
 <!-- Ekstrakurikuler Section End -->
+
+<style>
+.img-fixed {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+</style>
+
 
 @endsection

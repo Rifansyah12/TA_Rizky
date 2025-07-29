@@ -26,7 +26,7 @@ class AdminPendaftaranController extends Controller
 
         $pendaftar->save();
 
-        return redirect()->route('kelola_pendaftaran.index')->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->route('admin.kelola_pendaftaran.index')->with('success', 'Status pendaftaran berhasil diperbarui.');
     }
 
 

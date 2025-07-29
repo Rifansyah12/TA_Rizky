@@ -52,37 +52,6 @@
                         </form>
                     </td>
                 </tr>
-
-                <!-- Modal Edit (harus di dalam loop) -->
-                <div class="modal fade" id="editModal{{ $galeri->id }}" tabindex="-1">
-                    <div class="modal-dialog">
-                        <form method="POST" action="{{ route('cms.galeri.update', $galeri) }}" enctype="multipart/form-data" class="modal-content">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Galeri</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-2">
-                                    <label>Judul</label>
-                                    <input type="text" name="judul" class="form-control" value="{{ $galeri->judul }}" required>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Deskripsi</label>
-                                    <textarea name="deskripsi" class="form-control">{{ $galeri->deskripsi }}</textarea>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Gambar</label>
-                                    <input type="file" name="gambar" class="form-control">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 @empty
                 <tr>
                     <td colspan="5" class="text-center">Tidak ada data galeri.</td>
@@ -123,3 +92,35 @@
     </div>
 </div>
 @endsection
+
+
+                <!-- Modal Edit (harus di dalam loop) -->
+                <div class="modal fade" id="editModal{{ $galeri->id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <form method="POST" action="{{ route('cms.galeri.update', $galeri) }}" enctype="multipart/form-data" class="modal-content">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Galeri</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-2">
+                                    <label>Judul</label>
+                                    <input type="text" name="judul" class="form-control" value="{{ $galeri->judul }}" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Deskripsi</label>
+                                    <textarea name="deskripsi" class="form-control">{{ $galeri->deskripsi }}</textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Gambar</label>
+                                    <input type="file" name="gambar" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
