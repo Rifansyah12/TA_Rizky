@@ -1,17 +1,17 @@
-<?php
+    <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
 
-class Artikel extends Model
-{
-    use HasFactory;
+    class Artikel extends Model
+    {
+        use HasFactory;
 
-    protected $fillable = [
-        'judul',
-        'deskripsi',
-        'gambar',
-    ];
-}
+        protected $fillable = [
+            'judul',
+            'deskripsi',
+            'gambar',
+        ];
+    }

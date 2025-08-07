@@ -10,14 +10,18 @@ class Pendaftaran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_lengkap',
-        'nik',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'jenis_kelamin',
-        'alamat',
-        'nama_ayah',
-        'nama_ibu',
-        'no_hp',
-    ];
+    'nama_lengkap',
+    'nik',
+    'tempat_lahir',
+    'tanggal_lahir',
+    'jenis_kelamin',
+    'alamat',
+    'nama_ayah',
+    'nama_ibu',
+    'no_hp',
+    'pertanyaan_ai_1',
+    'pertanyaan_ai_2',
+    'pertanyaan_ai_3',
+    'pertanyaan_ai_4',
+];
 }
