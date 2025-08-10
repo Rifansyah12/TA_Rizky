@@ -12,6 +12,7 @@
                 <th>Nama Kelas</th>
                 <th>Hari</th>
                 <th>Jam</th>
+                <th>Mapel</th>
                 <th>Guru</th>
                 <th>Aksi</th>
             </tr>
@@ -23,6 +24,7 @@
                     <td>{{ $item->kelas }}</td>
                     <td>{{ $item->hari }}</td>
                     <td>{{ $item->jam }}</td>
+                    <td>{{ $item->guru ? $item->guru->mapel : '-' }}</td>
                     <td>{{ $item->guru ? $item->guru->nama : '-' }}</td>
                     <td>
                         {{-- Edit --}}
@@ -56,6 +58,17 @@
                                     <div class="mb-2">
                                         <label>Jam</label>
                                         <input type="text" name="jam" class="form-control" value="{{ $item->jam }}" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Guru</label>
+                                        <select name="guru_id" class="form-control" required>
+                                            <option value="">-- Guru --</option>
+                                            @foreach($gurus as $guru)
+                                                <option value="{{ $guru->id }}" {{ $item->mapel == $guru->guru_id ? 'selected' : '' }}>
+                                                    {{ $guru->mapel }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-2">
                                         <label>Guru</label>
@@ -127,9 +140,9 @@
                         <div class="mb-2">
                             <label>Nama Kelas</label>
                             <select name="kelas" class="form-control" required>
-                                <option value="">-- Pilih Hari --</option>
-                                <option value="Senin">A</option>
-                                <option value="Selasa">B</option>
+                                <option value="">-- Pilih kelas --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
                             </select>
                         </div>
                         <div class="mb-2">
@@ -146,6 +159,17 @@
                         <div class="mb-2">
                             <label>Jam</label>
                             <input type="text" name="jam" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Guru</label>
+                            <select name="guru_id" class="form-control" required>
+                                <option value="">-- Guru --</option>
+                                @foreach($gurus as $guru)
+                                    <option value="{{ $guru->id }}" {{ $item->mapel == $guru->guru_id ? 'selected' : '' }}>
+                                        {{ $guru->mapel }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-2">
                             <label>Guru</label>

@@ -46,6 +46,7 @@
                             <th>Nama Ibu</th>
                             <th>No HP</th>
                             <th>Status</th>
+                            <th>Konfirmasi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -74,6 +75,19 @@
                                         <span class="badge bg-warning text-dark">Menunggu</span>
                                     @endif
                                 </td>
+
+<td>
+                        @if($pendaftar->status == 'menunggu')
+                        <form action="{{ route('kelola_pendaftaran.konfirmasi', $pendaftar->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" name="aksi" value="terima" class="btn btn-success btn-sm">Terima</button>
+                            <button type="submit" name="aksi" value="tolak" class="btn btn-danger btn-sm">Tolak</button>
+                        </form>
+                        @else
+                        <em>Terkonfirmasi</em>
+                        @endif
+                    </td>
                                 <td class="text-center">
                                     <form action="{{ route('kelola_pendaftaran.hapus', $pendaftar->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                         @csrf

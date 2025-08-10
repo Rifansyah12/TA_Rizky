@@ -71,7 +71,7 @@ Route::get('/admin/dashboard', [DashboardadminController::class, 'index'])->name
 // Admin_pendaftaran
 Route::get('/admin/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('kelola_pendaftaran.index');
 Route::put('/admin/kelola-pendaftaran/konfirmasi/{id}', [AdminPendaftaranController::class, 'konfirmasi'])->name('kelola_pendaftaran.konfirmasi');
-Route::delete('/kelola_pendaftaran/{id}', [AdminPendaftaranController::class, 'hapus'])->name('kelola_pendaftaran.hapus');
+Route::delete('/kelola_pendaftaran/{id}', [AdminPendaftaranController::class, 'delete'])->name('kelola_pendaftaran.hapus');
 
 
 // pendaftaran
