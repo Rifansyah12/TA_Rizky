@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin\cms;
 use App\Http\Controllers\Controller;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class CmsKegiatanController extends Controller
 {
@@ -27,7 +29,7 @@ class CmsKegiatanController extends Controller
             'judul' => 'required|string',
             'deskripsi' => 'nullable|string',
             'tanggal' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         $data = $request->only('judul', 'deskripsi', 'tanggal');
@@ -43,25 +45,47 @@ class CmsKegiatanController extends Controller
 
     public function update(Request $request, Kegiatan $kegiatan)
     {
-        $request->validate([
-            'judul' => 'required|string',
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'tanggal' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
-        $data = $request->only('judul', 'deskripsi', 'tanggal');
+        // Update data teks
+        $kegiatan->judul = $validated['judul'];
+        $kegiatan->deskripsi = $validated['deskripsi'];
+        $kegiatan->tanggal = $validated['tanggal'];
 
+        // Cek dan simpan foto baru jika ada
         if ($request->hasFile('foto')) {
-            if ($kegiatan->foto && file_exists(public_path('storage/' . $kegiatan->foto))) {
-                unlink(public_path('storage/' . $kegiatan->foto));
+            // Hapus foto lama (optional)
+            if ($kegiatan->foto && Storage::exists($kegiatan->foto)) {
+                Storage::delete($kegiatan->foto);
             }
-            $data['foto'] = $request->file('foto')->store('kegiatan', 'public');
+
+            // Simpan foto baru
+            $fotoPath = $request->file('foto')->store('kegiatan', 'public');
+            $kegiatan->foto = $fotoPath;
         }
 
-        $kegiatan->update($data);
+        $kegiatan->save();
 
-        return back()->with('success', 'Kegiatan berhasil diperbarui.');
+        return redirect()->route('cms.kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+
+        // Jika ada foto, bisa tambahkan penghapusan file dari storage juga, opsional
+        if ($kegiatan->foto && Storage::exists($kegiatan->foto)) {
+            Storage::delete($kegiatan->foto);
+        }
+
+        $kegiatan->delete();
+
+        return redirect()->route('cms.kegiatan.index')->with('success', 'Data kegiatan berhasil dihapus.');
     }
 
 

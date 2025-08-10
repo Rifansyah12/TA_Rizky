@@ -55,7 +55,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
 </div>
 
 <!-- Modal Tambah -->
@@ -89,7 +88,7 @@
 </div>
 @endsection
 
-                <!-- Modal Edit -->
+                @foreach ($artikels as $artikel)
                 <div class="modal fade" id="editModal{{ $artikel->id }}" tabindex="-1">
                     <div class="modal-dialog">
                         <form method="POST" action="{{ route('cms.artikel.update', $artikel) }}" enctype="multipart/form-data" class="modal-content">
@@ -119,3 +118,5 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            @endforeach

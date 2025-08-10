@@ -10,10 +10,15 @@
             <input type="text" name="keyword" class="form-control" placeholder="Cari nama siswa..." value="{{ request('keyword') }}">
             <button type="submit" class="btn btn-primary">Cari</button>
         </div>
+            <select name="perPage" class="form-select w-auto">
+                @foreach ([5,10,20,100,200,500] as $size)
+                    <option value="{{ $size }}" {{ request('perPage') == $size ? 'selected' : '' }}>{{ $size }}</option>
+                @endforeach
+            </select>
     </form>
 
     {{-- Tabel Siswa --}}
-    <table class="table table-bordered table-striped">
+   <table id="siswaTable" class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -220,4 +225,48 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<!-- Bootstrap 5 dan jQuery sudah termasuk? Jika belum, tambahkan juga jQuery dan Bootstrap JS -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" />
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    var perPage = {{ request('perPage', 5) }}; // Default to 5 if not set
+    $('#siswaTable').DataTable({
+        "pageLength": perPage,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "language": {
+            "search": "Filter Data:",
+            "paginate": {
+                "previous": "Sebelumnya",
+                "next": "Selanjutnya"
+            },
+            "zeroRecords": "Data tidak ditemukan",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            "infoEmpty": "Menampilkan 0 sampai 0 dari 0 data",
+            "infoFiltered": "(disaring dari total _MAX_ data)"
+        }
+    });
+});
+</script>
 @endsection

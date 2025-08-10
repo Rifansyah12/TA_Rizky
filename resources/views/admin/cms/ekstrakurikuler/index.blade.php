@@ -43,7 +43,7 @@
                         <td>{{ $item->deskripsi }}</td>
                         <td>
                             <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">Edit</button>
-                            <form action="{{ route('cms.ekstrakurikuler.destroy', $item) }}" method="POST" class="d-inline">
+                            <form action="{{ route('cms.ekstrakurikuler.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</button>
                             </form>
@@ -92,9 +92,10 @@
 
 
                     <!-- Modal Edit -->
+                     @foreach ($items as $item )
                     <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1">
                         <div class="modal-dialog">
-                            <form method="POST" action="{{ route('cms.ekstrakurikuler.update', $item) }}" enctype="multipart/form-data" class="modal-content">
+                            <form method="POST" action="{{ route('cms.ekstrakurikuler.update', $item->id) }}" enctype="multipart/form-data" class="modal-content">
                                 @csrf @method('PUT')
                                 <div class="modal-header">
                                     <h5 class="modal-title">Edit Ekstrakurikuler</h5>
@@ -125,3 +126,4 @@
                             </form>
                         </div>
                     </div>
+                    @endforeach

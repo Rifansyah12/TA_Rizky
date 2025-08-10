@@ -5,47 +5,76 @@
     <h1>Selamat datang, {{ Auth::user()->name }}</h1>
     <p>Anda login sebagai <strong>Admin</strong></p>
 
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total Pendaftar</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $totalPendaftar }}</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Sudah Dikonfirmasi</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $sudahDikonfirmasi }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="mt-5">
-        <h4>Statistik Pendaftaran Siswa RA</h4>
-        <canvas id="chartSiswaRA" height="100"></canvas>
+        <h4>Diagram Statistik Pendaftar</h4>
+        <canvas id="diagramStatistik" style="max-height: 150px;"></canvas>
     </div>
 </div>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- Pastikan ini berada di bagian @yield('scripts') dalam layout --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script>
-    const ctx = document.getElementById('chartSiswaRA').getContext('2d');
-    const chartSiswaRA = new Chart(ctx, {
+document.addEventListener('DOMContentLoaded', function () {
+    const totalPendaftar = {{ $totalPendaftar }};
+    const sudahDikonfirmasi = {{ $sudahDikonfirmasi }};
+    
+    const ctx = document.getElementById('diagramStatistik')?.getContext('2d');
+    if (!ctx) {
+        console.error('Canvas dengan id "diagramStatistik" tidak ditemukan.');
+        return;
+    }
+
+    new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
+            labels: ['Total Pendaftar', 'Sudah Dikonfirmasi'],
             datasets: [{
-                label: 'Jumlah Pendaftar',
-                data: [15, 22, 30, 18, 27], // Dummy data
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                label: 'Jumlah',
+                data: [totalPendaftar, sudahDikonfirmasi],
+                backgroundColor: ['#007bff', '#28a745'],
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Jumlah Siswa'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Bulan'
+                    ticks: {
+                        stepSize: 1
                     }
                 }
             }
         }
     });
+});
 </script>
 @endsection

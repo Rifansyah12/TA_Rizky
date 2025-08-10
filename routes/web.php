@@ -28,6 +28,7 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AIController;
 use App\Http\Controllers\CalisAuthController;
+use App\Http\Controllers\admin\DashboardadminController;
 
 
 Route::get('/', [WelcomeController::class, 'index']);
@@ -66,7 +67,7 @@ Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 
-
+Route::get('/admin/dashboard', [DashboardadminController::class, 'index'])->name('admin.dashboard');
 // Admin_pendaftaran
 Route::get('/admin/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('kelola_pendaftaran.index');
 Route::put('/admin/kelola-pendaftaran/konfirmasi/{id}', [AdminPendaftaranController::class, 'konfirmasi'])->name('kelola_pendaftaran.konfirmasi');

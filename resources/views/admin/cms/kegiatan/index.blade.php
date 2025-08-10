@@ -28,6 +28,7 @@
                     <th>No</th>
                     <th>Judul</th>
                     <th>Deskripsi</th>
+                    <th>Foto</th>
                     <th>Tanggal</th>
                     <th>Aksi</th>
                 </tr>
@@ -38,11 +39,17 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $kegiatan->judul }}</td>
                         <td>{{ $kegiatan->deskripsi }}</td>
+                        <td>
+                            @if($kegiatan->foto)
+                                <img src="{{ asset('storage/' . $kegiatan->foto) }}" width="80" class="img-thumbnail">
+                            @endif
+                        </td>
                         <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal)->format('d M Y') }}</td>
                         <td>
                             <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $kegiatan->id }}">Edit</button>
                             <form action="{{ route('cms.kegiatan.destroy', $kegiatan) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
+                                @csrf
+                                @method('DELETE')
                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus kegiatan ini?')">Hapus</button>
                             </form>
                         </td>
@@ -92,39 +99,52 @@
 </div>
 @endsection
 
-                    <!-- Modal Edit (HARUS di dalam loop) -->
-                    <div class="modal fade" id="editModal{{ $kegiatan->id }}" tabindex="-1">
-                        <div class="modal-dialog">
-                            <form method="POST" action="{{ route('cms.kegiatan.update', $kegiatan) }}" class="modal-content" enctype="multipart/form-data">
-                                @csrf @method('PUT')
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Kegiatan</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-2">
-                                        <label>Judul</label>
-                                        <input type="text" name="judul" class="form-control" value="{{ $kegiatan->judul }}" required>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label>Foto</label><br>
-                                        @if($kegiatan->foto)
-                                            <img src="{{ asset('storage/' . $kegiatan->foto) }}" width="100" class="mb-2">
-                                        @endif
-                                        <input type="file" name="foto" class="form-control">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label>Deskripsi</label>
-                                        <textarea name="deskripsi" class="form-control" rows="3">{{ $kegiatan->deskripsi }}</textarea>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label>Tanggal</label>
-                                        <input type="date" name="tanggal" class="form-control" value="{{ $kegiatan->tanggal }}">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+ <!-- Modal Edit (dalam loop agar $kegiatan tidak undefined) -->
+  @foreach ($kegiatans as $kegiatan)
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="modal fade" id="editModal{{ $kegiatan->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('cms.kegiatan.update', $kegiatan) }}" class="modal-content" enctype="multipart/form-data">
+             @csrf
+             @method('PUT')
+             <div class="modal-header">
+                <h5 class="modal-title">Edit Kegiatan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+             </div>
+             <div class="modal-body">
+                <div class="mb-2">
+                 <label>Judul</label>
+                  <input type="text" name="judul" class="form-control" value="{{ $kegiatan->judul }}" required>
+                </div>
+             <div class="mb-2">
+                 <label>Foto</label><br>
+                   @if($kegiatan->foto)
+                       <img src="{{ asset('storage/' . $kegiatan->foto) }}" width="100" class="mb-2">
+                        @endif
+                  <input type="file" name="foto" class="form-control">
+             </div>
+             <div class="mb-2">
+                   <label>Deskripsi</label>
+                        <textarea name="deskripsi" class="form-control" rows="3">{{ $kegiatan->deskripsi }}</textarea>
+             </div>
+             <div class="mb-2">
+                   <label>Tanggal</label>
+                        <input type="date" name="tanggal" class="form-control" value="{{ $kegiatan->tanggal }}">
+             </div>
+            </div>
+             <div class="modal-footer">
+                    <button class="btn btn-primary">Simpan</button>
+             </div>
+    </form>
+   </div>
+</div>
+@endforeach
