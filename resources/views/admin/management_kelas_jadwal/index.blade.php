@@ -12,7 +12,7 @@
                 <th>Nama Kelas</th>
                 <th>Hari</th>
                 <th>Jam</th>
-                <th>Wali Kelas</th>
+                <th>Guru</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                     <td>{{ $item->kelas }}</td>
                     <td>{{ $item->hari }}</td>
                     <td>{{ $item->jam }}</td>
-                    <td>{{ $item->wali_kelas }}</td>
+                    <td>{{ $item->guru ? $item->guru->nama : '-' }}</td>
                     <td>
                         {{-- Edit --}}
                         <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">Edit</button>
@@ -58,8 +58,15 @@
                                         <input type="text" name="jam" class="form-control" value="{{ $item->jam }}" required>
                                     </div>
                                     <div class="mb-2">
-                                        <label>Wali Kelas</label>
-                                        <input type="text" name="wali_kelas" class="form-control" value="{{ $item->wali_kelas }}" required>
+                                        <label>Guru</label>
+                                        <select name="guru_id" class="form-control" required>
+                                            <option value="">-- Guru --</option>
+                                            @foreach($gurus as $guru)
+                                                <option value="{{ $guru->id }}" {{ $item->guru_id == $guru->id ? 'selected' : '' }}>
+                                                    {{ $guru->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -119,19 +126,35 @@
                     <div class="modal-body">
                         <div class="mb-2">
                             <label>Nama Kelas</label>
-                            <input type="text" name="kelas" class="form-control" required>
+                            <select name="kelas" class="form-control" required>
+                                <option value="">-- Pilih Hari --</option>
+                                <option value="Senin">A</option>
+                                <option value="Selasa">B</option>
+                            </select>
                         </div>
                         <div class="mb-2">
                             <label>Hari</label>
-                            <input type="text" name="hari" class="form-control" required>
+                            <select name="hari" class="form-control" required>
+                                <option value="">-- Pilih Hari --</option>
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                            </select>
                         </div>
                         <div class="mb-2">
                             <label>Jam</label>
                             <input type="text" name="jam" class="form-control" required>
                         </div>
                         <div class="mb-2">
-                            <label>Wali Kelas</label>
-                            <input type="text" name="wali_kelas" class="form-control" required>
+                            <label>Guru</label>
+                            <select name="guru_id" class="form-control" required>
+                                <option value="">-- Guru --</option>
+                                  @foreach($gurus as $guru)
+                                    <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                                  @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

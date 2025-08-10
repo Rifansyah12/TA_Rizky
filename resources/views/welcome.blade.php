@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Ra Ar-risalah</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
@@ -70,6 +71,46 @@
     padding: 0;
 }
 
+.btn-ai {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4CAF50; /* Hijau */
+    border: none;
+}
+.btn-ai:hover {
+    background-color: #45a049;
+}
+@keyframes blink {
+    0%, 20%, 40%, 60%, 80%, 100% { opacity: 1; }
+    10%, 30%, 50%, 70%, 90% { opacity: 0; }
+    }
+    @keyframes nod {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(5deg); }
+    }
+    .robot-head {
+    transform-origin: center bottom;
+    animation: nod 2s infinite ease-in-out;
+    }
+    .robot-eye {
+    animation: blink 3s infinite;
+    }
+    .btn-ai {
+    background-color: #0d6efd;
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    }
 </style>
 <body>
     <div class="container-xxl bg-success p-0">
@@ -108,7 +149,7 @@
                     <a href="{{ route('prestasi') }}" class="nav-item nav-link">Prestasi</a>
                     <a href="{{ route('ekstrakulikuler') }}" class="nav-item nav-link">Ekstrakulikuler</a>  
                     </div>
-                    <a href="{{ route('pendaftaran.index') }}" class="btn btn-primary rounded-pill px-3 my-2">
+                    <a href="{{ route('LoginCalis') }}" class="btn btn-primary rounded-pill px-3 my-2">
                         PPDB Online<i class="fa fa-arrow-right ms-3"></i>
                     </a>
                     <a href="{{ route('login') }}" class="btn btn-light rounded-pill px-3 me-2 my-2">
@@ -541,8 +582,37 @@
         <!-- Footer End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Ai -->
+        <a href="#" class="btn-ai" data-bs-toggle="modal" data-bs-target="#modalAI">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 64 64" fill="none">
+            <g class="robot-head">
+            <rect x="12" y="20" width="40" height="28" rx="5" fill="#ccc" stroke="#000" stroke-width="2"/>
+            <circle class="robot-eye" cx="24" cy="34" r="4" fill="#000"/>
+            <circle class="robot-eye" cx="40" cy="34" r="4" fill="#000"/>
+            </g>
+            <rect x="28" y="10" width="8" height="10" fill="#888"/>
+        </svg>
+        </a>
+
+        <!-- Modal AI -->
+        <div class="modal fade" id="modalAI" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tanya AI</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea class="form-control" id="pertanyaanAI" rows="4" placeholder="Tulis pertanyaan Anda..."></textarea>
+                        <div id="jawabanAI" class="mt-3 p-2 border rounded" style="min-height: 80px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="kirimKeAI()">Kirim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- JavaScript Libraries -->
@@ -552,9 +622,50 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('js/ai.js') }}"></script>
+
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+   <script>
+    async function kirimKeAI() {
+        const pertanyaan = document.getElementById("pertanyaanAI").value;
+        const output = document.getElementById("jawabanAI");
+
+        if (!pertanyaan.trim()) {
+            alert("Silakan tulis pertanyaan terlebih dahulu.");
+            return;
+        }
+
+        output.innerHTML = "⏳ Sedang memproses jawaban...";
+
+        try {
+            const response = await fetch("/ai-ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                },
+                body: JSON.stringify({ pertanyaan }),
+            });
+
+            const text = await response.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error("Response bukan JSON:", text);
+                output.innerHTML = "⚠ Terjadi kesalahan pada server.";
+                return;
+            }
+
+            output.innerHTML = data.jawaban || "Tidak ada jawaban.";
+        } catch (error) {
+            console.error(error);
+            output.innerHTML = "⚠ Terjadi kesalahan. Coba lagi.";
+        }
+    }
+</script>
 </body>
 
 </html>

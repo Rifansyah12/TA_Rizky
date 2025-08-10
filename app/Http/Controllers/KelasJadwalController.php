@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\KelasJadwal;
+use App\Models\Guru; 
 use Illuminate\Http\Request;
 
 class KelasJadwalController extends Controller
 {
     public function index()
     {
-        $data = KelasJadwal::all();
-        return view('admin.management_kelas_jadwal.index', compact('data'));
+        $data = KelasJadwal::with('guru')->get();
+        $gurus = Guru::all(); // ambil semua guru
+        return view('admin.management_kelas_jadwal.index', compact('data','gurus'));
     }
 
     public function store(Request $request)
@@ -19,7 +21,7 @@ class KelasJadwalController extends Controller
             'kelas' => 'required',
             'hari' => 'required',
             'jam' => 'required',
-            'wali_kelas' => 'required',
+            'guru_id' => 'required|exists:gurus,id',
         ]);
 
         KelasJadwal::create($request->all());
@@ -33,7 +35,7 @@ class KelasJadwalController extends Controller
             'kelas' => 'required',
             'hari' => 'required',
             'jam' => 'required',
-            'wali_kelas' => 'required',
+            'guru_id' => 'required|exists:gurus,id',
         ]);
 
         $jadwal = KelasJadwal::findOrFail($id);

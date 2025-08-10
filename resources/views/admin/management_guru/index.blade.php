@@ -41,7 +41,24 @@
                     <td>{{ $guru->mapel }}</td>
                     <td>{{ $guru->no_hp }}</td>
                     <td>
-                        ...
+                        {{-- Tombol Detail --}}
+                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal{{ $guru->id }}">
+                            <i class="bi bi-eye"></i> Detail
+                        </button>
+
+                        {{-- Tombol Edit --}}
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $guru->id }}">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+
+                        {{-- Tombol Hapus --}}
+                        <form action="{{ route('management_guru.destroy', $guru->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus guru ini?')">
+                                <i class="bi bi-trash"></i> Hapus
+                            </button>
+                        </form>
                     </td>
                 </tr>
 
@@ -73,7 +90,7 @@
                 <div class="modal fade" id="editModal{{ $guru->id }}" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form method="POST" action="{{ route('management_guru.update', $guru->id) }}">
+                            <form method="POST" action="{{ route('management_guru.update', $guru->id) }}" enctype="multipart/form-data">
                                 @csrf @method('PUT')
                                 <div class="modal-header"><h5 class="modal-title">Edit Guru</h5></div>
                                 <div class="modal-body">
@@ -134,9 +151,23 @@
                             <input type="text" name="nip" class="form-control" required>
                         </div>
                         <div class="mb-2">
-                            <label>Mata Pelajaran</label>
-                            <input type="text" name="mapel" class="form-control" required>
+                            <label for="mapel">Mata Pelajaran</label>
+                            <select name="mapel" id="mapel" class="form-control" required>
+                                <option value="">-- Pilih Mata Pelajaran --</option>
+                                <option value="Doa & Fisik Motorik">Do’a & Fisik Motorik</option>
+                                <option value="Jurnal,PAI,Sosem">Jurnal, PAI, Sosem</option>
+                                <option value="Pilar Karakter">Pilar Karakter</option>
+                                <option value="Sentra (Bahasa & Kognitif)">Sentra (Bahasa & Kognitif)</option>
+                                <option value="Wudhu,sholat dzuhur,recalling & doa">Wudhu, sholat dzuhur, recalling & do’a</option>
+                                <option value="Futsal & Tari">Futsal & Tari</option>
+                                <option value="Menu Sehat">Menu Sehat</option>
+                                <option value="Intra Kulikuler">Intra Kulikuler</option>
+                                <option value="Lengser & Kaulinan">Lengser & Kaulinan</option>
+                                <option value="Wudhu & sholat dhuha">Wudhu & sholat dhuha</option>
+                                <option value="Recalling & doa">Recalling & do’a</option>
+                            </select>
                         </div>
+
                         <div class="mb-2">
                             <label>No HP</label>
                             <input type="text" name="no_hp" class="form-control" required>

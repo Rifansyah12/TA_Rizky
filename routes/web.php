@@ -26,10 +26,12 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\ArtikelController; 
 use App\Http\Controllers\GaleriController;
-
+use App\Http\Controllers\AIController;
+use App\Http\Controllers\CalisAuthController;
 
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::match(['get', 'post'], '/ai-ask', [AiController::class, 'tanya']);
 Route::get('/footer', [FooterController::class, 'index']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
@@ -40,6 +42,24 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard');
     });
 });
+
+
+// Login Calis
+Route::get('/login-calis', [CalisAuthController::class, 'showLogin'])->name('LoginCalis');
+Route::post('/login-calis', [CalisAuthController::class, 'login']);
+
+Route::get('/register-calis', [CalisAuthController::class, 'showRegister'])->name('RegisterCalis');
+Route::post('/register-calis', [CalisAuthController::class, 'register']);
+
+Route::post('/logout-calis', [CalisAuthController::class, 'logout'])->name('LogoutCalis');
+
+// Route pendaftaran (hanya bisa diakses jika sudah login calis)
+Route::middleware('auth:calis')->group(function() {
+    Route::get('/pendaftaran', function() {
+        return view('pendaftaran.index');  // view form pendaftaran calon siswa
+    })->name('pendaftaran.index');
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
@@ -50,6 +70,8 @@ Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 // Admin_pendaftaran
 Route::get('/admin/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('kelola_pendaftaran.index');
 Route::put('/admin/kelola-pendaftaran/konfirmasi/{id}', [AdminPendaftaranController::class, 'konfirmasi'])->name('kelola_pendaftaran.konfirmasi');
+Route::delete('/kelola_pendaftaran/{id}', [AdminPendaftaranController::class, 'hapus'])->name('kelola_pendaftaran.hapus');
+
 
 // pendaftaran
 Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');

@@ -9,5 +9,11 @@ class Guru extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'nip', 'mapel', 'no_hp','foto'];
+    protected $fillable = ['nama', 'nip', 'mapel', 'no_hp', 'foto'];
+
+    public function kelasJadwal()
+    {
+        return $this->hasMany(KelasJadwal::class, 'guru_id');
+    }
 }
+

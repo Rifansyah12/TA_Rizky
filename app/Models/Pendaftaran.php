@@ -19,9 +19,5 @@ class Pendaftaran extends Model
     'nama_ayah',
     'nama_ibu',
     'no_hp',
-    'pertanyaan_ai_1',
-    'pertanyaan_ai_2',
-    'pertanyaan_ai_3',
-    'pertanyaan_ai_4',
 ];
 }

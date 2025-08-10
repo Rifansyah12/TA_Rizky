@@ -15,6 +15,11 @@ class KelasJadwal extends Model
         'kelas',
         'hari',
         'jam',
-        'wali_kelas',
+        'guru_id', // ganti wali_kelas jadi guru_id
     ];
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id');
+    }
 }
